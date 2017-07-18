@@ -91,3 +91,41 @@ The service should connect to the both the suppliers using HTTP.
 - The implementation should be made as close to 'production ready' as possible within the time constraints.
 
 It is fine to change any of the supplied application code, if you choose to do so please add comments to indicate what has changed and why.
+
+**SOLUTION:**
+
+Was simulated the execution of services **CrazyAir** and **ToughJet** who creates flights with random values based in the input.
+
+Was implemented a controller (com.travix.medusa.busyflights.controller.BusyFlightsController) who gets the parameters if HTTP request using method GET. It creates a BusyFlightsRequest object and send it to the service com.travix.medusa.busyflights.services.busyflights.impl.BusyFlightsServiceImpl who will use the external services.
+
+The result of the external services are cached in a Array List and them sorted by fare as required. Then this list will be parsed as JSON using @ResponseBody and printed in the html.
+
+The based classes of the problem, was not modified.
+
+**IMPORTANT:**
+
+The implemented services is assuming that the input that is already validated.
+
+**FOR PRODUCTION:**
+
+- Should be implemented validations in case server side validation are required.
+
+- Should be checked the error management.
+
+- Functional testing of border cases.
+
+- Write unit tests.
+
+**TO TEST IT:**
+
+1.- Run com.travix.medusa.busyflights.BusyFlightsApplication as java application.
+
+2.- Enter in the url "http://localhost:8080/searchAirFare?origin=PTY&destination=AMS&departureDate=2017-12-03&returnDate=2017-12-04&numberOfPassengers=1" where:
+
+ - origin=PTY represents the 3 letter IATA code of origin.
+ - destination=AMS represents the 3 letter IATA code of destination.
+ - departureDate=2017-12-03 represents the departure date in ISO_LOCAL_DATE format
+ - returnDate=2017-12-04 represents the return date in ISO_LOCAL_DATE format
+ - numberOfPassengers=1 represents the amount of passengers
+ 
+ **TOTAL TIME IMPLEMENTING THIS SOLUTION: 98 MINUTES**

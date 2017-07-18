@@ -3,6 +3,8 @@ package com.travix.medusa.busyflights.util;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * Util class used by simulates services.
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 public class ProjectUtil {
@@ -25,16 +27,15 @@ public class ProjectUtil {
     };
 
     private static String[] CABIN_CLASS = new String[]{
-            "First",
-            "Business",
-            "Economic"
+            "E",
+            "B"
     };
 
-    public static String getRandomAirline(){
+    public static String getRandomAirline() {
         return AIRLINE_LIST[ThreadLocalRandom.current().nextInt(AIRLINE_LIST.length)];
     }
 
-    public static String getRandomCabinClass(){
+    public static String getRandomCabinClass() {
         return CABIN_CLASS[ThreadLocalRandom.current().nextInt(CABIN_CLASS.length)];
     }
 
@@ -47,22 +48,20 @@ public class ProjectUtil {
         int minute = ThreadLocalRandom.current().nextInt(59 + 1);
 
         // hour
-        if(hour < 10){
+        if (hour < 10) {
             time.append("0");
             time.append(hour);
-        }
-        else{
+        } else {
             time.append(hour);
         }
 
         time.append(":");
 
         // minute
-        if(minute < 10){
+        if (minute < 10) {
             time.append("0");
             time.append(minute);
-        }
-        else{
+        } else {
             time.append(minute);
         }
 

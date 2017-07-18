@@ -23,7 +23,7 @@ import java.util.List;
  * Created by ffaria on 7/18/17.
  */
 @Service
-public class BusyFlightsServiceImpl implements IBusyFlightsService{
+public class BusyFlightsServiceImpl implements IBusyFlightsService {
 
 
     HTTPCrazyAirService httpCrazyAirService;
@@ -38,14 +38,16 @@ public class BusyFlightsServiceImpl implements IBusyFlightsService{
     @Override
     public List<BusyFlightsResponse> searchFlights(BusyFlightsRequest busyFlightsRequest) {
 
+        // the result list
         List<BusyFlightsResponse> busyFlightsResponses = new ArrayList<>();
 
+        // parsing object request object to make it compatible with the external service
         CrazyAirRequestAdapter crazyAirRequestAdapter = new CrazyAirRequestAdapter(busyFlightsRequest);
 
-        ToughJetRequestAdapter toughJetRequestAdapter = new ToughJetRequestAdapter(busyFlightsRequest);
-
+        // invoking the external service
         List<CrazyAirResponse> crazyAirResult = this.httpCrazyAirService.getResponse(crazyAirRequestAdapter.getCrazyAirRequest());
 
+        // parsing the answer to BusyFlightsResponse object
         for (CrazyAirResponse crazyAirResponse : crazyAirResult) {
 
             CrazyAirResponseAdapter crazyAirResponseAdapter = new CrazyAirResponseAdapter(crazyAirResponse);
@@ -54,8 +56,13 @@ public class BusyFlightsServiceImpl implements IBusyFlightsService{
 
         }
 
+        // parsing object request object to make it compatible with the external service
+        ToughJetRequestAdapter toughJetRequestAdapter = new ToughJetRequestAdapter(busyFlightsRequest);
+
+        // invoking the external service
         List<ToughJetResponse> toughJetResult = this.httpToughJetService.getResponse(toughJetRequestAdapter.getToughJetRequest());
 
+        // parsing the answer to BusyFlightsResponse object
         for (ToughJetResponse toughJetResponse : toughJetResult) {
 
             ToughJetResponseAdapter toughJetResponseAdapter = new ToughJetResponseAdapter(toughJetResponse);
@@ -63,7 +70,7 @@ public class BusyFlightsServiceImpl implements IBusyFlightsService{
             busyFlightsResponses.add(toughJetResponseAdapter.getBusyFlightsResponse());
         }
 
-        // sorting by fare
+        // sorting the result by fare
         Collections.sort(busyFlightsResponses, new Comparator<BusyFlightsResponse>() {
             @Override
             public int compare(BusyFlightsResponse o1, BusyFlightsResponse o2) {

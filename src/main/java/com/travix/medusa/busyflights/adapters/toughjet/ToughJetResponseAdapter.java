@@ -1,12 +1,11 @@
 package com.travix.medusa.busyflights.adapters.toughjet;
 
-import com.travix.medusa.busyflights.adapters.commons.IBusyFlightsResponseAdapter;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
+ * Class used to transform ToughJetResponse object in a BusyFlightsResponse object
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 public class ToughJetResponseAdapter {
