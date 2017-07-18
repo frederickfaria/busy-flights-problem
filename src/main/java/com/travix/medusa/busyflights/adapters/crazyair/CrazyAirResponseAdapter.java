@@ -1,10 +1,11 @@
 package com.travix.medusa.busyflights.adapters.crazyair;
 
-import com.travix.medusa.busyflights.adapters.commons.IBusyFlightsResponseAdapter;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 
 /**
+ * Class used to transform CrazyAirResponse object in CrazyAirResponseAdapter
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 public class CrazyAirResponseAdapter {

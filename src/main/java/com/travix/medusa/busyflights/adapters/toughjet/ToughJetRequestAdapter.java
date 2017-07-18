@@ -4,6 +4,8 @@ import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 
 /**
+ * Class used to transform BusyFlightsRequest object in a ToughJetRequest object
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 public class ToughJetRequestAdapter {

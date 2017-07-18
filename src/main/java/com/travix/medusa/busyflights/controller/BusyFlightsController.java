@@ -2,10 +2,7 @@ package com.travix.medusa.busyflights.controller;
 
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.services.busyflights.util.IBusyFlightsService;
-import com.travix.medusa.busyflights.services.crazyair.util.HTTPCrazyAirService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +23,18 @@ public class BusyFlightsController {
     IBusyFlightsService busyFlightsService;
 
     @RequestMapping(value = "searchAirFare", method = RequestMethod.GET)
-    public @ResponseBody List<BusyFlightsResponse>  searchAirFare(@RequestParam Map<String,String> requestParams) throws Exception{
+    public
+    @ResponseBody
+    List<BusyFlightsResponse> searchAirFare(@RequestParam Map<String, String> requestParams) throws Exception {
 
+        // getting input data from HTTP request
         String origin = requestParams.get("origin");
         String destination = requestParams.get("destination");
         String departureDate = requestParams.get("departureDate");
         String returnDate = requestParams.get("returnDate");
         int numberOfPassengers = Integer.valueOf(requestParams.get("numberOfPassengers"));
 
+        // creating BusyFlightsRequest object to be processed by BusyFlightsService
         BusyFlightsRequest busyFlightsRequest = new BusyFlightsRequest();
         busyFlightsRequest.setOrigin(origin);
         busyFlightsRequest.setDestination(destination);

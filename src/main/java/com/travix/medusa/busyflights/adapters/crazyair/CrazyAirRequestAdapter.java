@@ -4,6 +4,8 @@ import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 
 /**
+ * Class used to transform a BusyFlightsRequest object to CrazyAirRequest
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 public class CrazyAirRequestAdapter {

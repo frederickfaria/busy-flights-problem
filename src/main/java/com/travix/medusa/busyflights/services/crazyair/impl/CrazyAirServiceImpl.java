@@ -13,20 +13,22 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * Simulates a Crazy Air response as a external service.
+ * <p>
  * Created by ffaria on 7/18/17.
  */
 @Service
 public class CrazyAirServiceImpl implements HTTPCrazyAirService {
 
     @Override
-    public List<CrazyAirResponse> getResponse(CrazyAirRequest crazyAirRequest){
+    public List<CrazyAirResponse> getResponse(CrazyAirRequest crazyAirRequest) {
 
         String origin = crazyAirRequest.getOrigin();
         String destination = crazyAirRequest.getDestination();
         LocalDate departureDate = LocalDate.parse(crazyAirRequest.getDepartureDate(), DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate returnDate = LocalDate.parse(crazyAirRequest.getReturnDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
-        int randomFlightAmount = ThreadLocalRandom.current().nextInt(3 + 1);
+        int randomFlightAmount = ThreadLocalRandom.current().nextInt(5 + 1);
 
         List<CrazyAirResponse> result = new ArrayList<>();
 
@@ -40,29 +42,28 @@ public class CrazyAirServiceImpl implements HTTPCrazyAirService {
             crazyAirResponse.setDepartureAirportCode(origin);
             crazyAirResponse.setDestinationAirportCode(destination);
 
-            if(departureDate.equals(returnDate)){
+            if (departureDate.equals(returnDate)) {
                 departureDateTime.append(departureDate.toString());
                 departureDateTime.append("T");
-                departureDateTime.append(ProjectUtil.generateRandomTime(0,12));
+                departureDateTime.append(ProjectUtil.generateRandomTime(0, 12));
 
                 crazyAirResponse.setDepartureDate(departureDateTime.toString());
 
                 returnDateTime.append(returnDate.toString());
                 returnDateTime.append("T");
-                returnDateTime.append(ProjectUtil.generateRandomTime(13,23));
+                returnDateTime.append(ProjectUtil.generateRandomTime(13, 23));
 
                 crazyAirResponse.setArrivalDate(returnDateTime.toString());
-            }
-            else {
+            } else {
                 departureDateTime.append(departureDate.toString());
                 departureDateTime.append("T");
-                departureDateTime.append(ProjectUtil.generateRandomTime(0,23));
+                departureDateTime.append(ProjectUtil.generateRandomTime(0, 23));
 
                 crazyAirResponse.setDepartureDate(departureDateTime.toString());
 
                 returnDateTime.append(returnDate.toString());
                 returnDateTime.append("T");
-                returnDateTime.append(ProjectUtil.generateRandomTime(0,23));
+                returnDateTime.append(ProjectUtil.generateRandomTime(0, 23));
 
                 crazyAirResponse.setArrivalDate(returnDateTime.toString());
             }
@@ -71,7 +72,7 @@ public class CrazyAirServiceImpl implements HTTPCrazyAirService {
 
             crazyAirResponse.setCabinclass(ProjectUtil.getRandomCabinClass());
 
-            crazyAirResponse.setPrice(Math.round(ThreadLocalRandom.current().nextDouble(100.0,600.0) * 100.0) / 100.0);
+            crazyAirResponse.setPrice(Math.round(ThreadLocalRandom.current().nextDouble(100.0, 600.0) * 100.0) / 100.0);
 
             result.add(crazyAirResponse);
 

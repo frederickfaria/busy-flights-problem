@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BusyFlightsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BusyFlightsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BusyFlightsApplication.class, args);
+    }
 }
