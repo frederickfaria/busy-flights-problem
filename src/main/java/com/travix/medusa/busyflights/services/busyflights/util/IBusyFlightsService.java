@@ -1,5 +1,6 @@
 package com.travix.medusa.busyflights.services.busyflights.util;
 
+import com.travix.medusa.busyflights.adapters.busyflights.BusyFlightsAdapterInterface;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 
@@ -11,5 +12,7 @@ import java.util.List;
 public interface IBusyFlightsService {
 
     List<BusyFlightsResponse> searchFlights(BusyFlightsRequest busyFlightsRequest);
+
+    void addAdapter(BusyFlightsAdapterInterface adapter);
 
 }

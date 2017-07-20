@@ -1,5 +1,7 @@
 package com.travix.medusa.busyflights.controller;
 
+import com.travix.medusa.busyflights.adapters.crazyair.CrazyAirAdapter;
+import com.travix.medusa.busyflights.adapters.toughjet.ToughJetAdapter;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.services.busyflights.util.IBusyFlightsService;
@@ -41,6 +43,9 @@ public class BusyFlightsController {
         busyFlightsRequest.setDepartureDate(departureDate);
         busyFlightsRequest.setReturnDate(returnDate);
         busyFlightsRequest.setNumberOfPassengers(numberOfPassengers);
+
+        busyFlightsService.addAdapter(new CrazyAirAdapter());
+        busyFlightsService.addAdapter(new ToughJetAdapter());
 
         List<BusyFlightsResponse> searchResult = busyFlightsService.searchFlights(busyFlightsRequest);
 
