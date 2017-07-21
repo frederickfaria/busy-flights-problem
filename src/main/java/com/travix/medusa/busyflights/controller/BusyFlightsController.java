@@ -1,7 +1,5 @@
 package com.travix.medusa.busyflights.controller;
 
-import com.travix.medusa.busyflights.adapters.crazyair.CrazyAirAdapter;
-import com.travix.medusa.busyflights.adapters.toughjet.ToughJetAdapter;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.services.busyflights.util.IBusyFlightsService;
@@ -22,12 +20,16 @@ import java.util.Map;
 public class BusyFlightsController {
 
     @Autowired
-    IBusyFlightsService busyFlightsService;
+    private IBusyFlightsService busyFlightsService;
 
     @RequestMapping(value = "searchAirFare", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<BusyFlightsResponse> searchAirFare(@RequestParam Map<String, String> requestParams) throws Exception {
+    BusyFlightsControllerAnswer searchAirFare(@RequestParam Map<String, String> requestParams) throws Exception {
+
+        BusyFlightsControllerAnswer answer = new BusyFlightsControllerAnswer();
+
+        String message = null;
 
         // getting input data from HTTP request
         String origin = requestParams.get("origin");
@@ -44,11 +46,19 @@ public class BusyFlightsController {
         busyFlightsRequest.setReturnDate(returnDate);
         busyFlightsRequest.setNumberOfPassengers(numberOfPassengers);
 
-        busyFlightsService.addAdapter(new CrazyAirAdapter());
-        busyFlightsService.addAdapter(new ToughJetAdapter());
-
+        // invoking main service
         List<BusyFlightsResponse> searchResult = busyFlightsService.searchFlights(busyFlightsRequest);
 
-        return searchResult;
+        if(searchResult.size() > 0){
+            message = searchResult.size() + " results found.";
+        }
+        else{
+            message = "No any result found.";
+        }
+
+        answer.setBusyFlightsResponses(searchResult);
+        answer.setMessage(message);
+
+        return answer;
     }
 }

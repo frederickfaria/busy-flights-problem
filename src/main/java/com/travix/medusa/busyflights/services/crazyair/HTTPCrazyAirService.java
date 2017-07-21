@@ -1,10 +1,8 @@
-package com.travix.medusa.busyflights.services.crazyair.impl;
+package com.travix.medusa.busyflights.services.crazyair;
 
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
-import com.travix.medusa.busyflights.services.crazyair.util.HTTPCrazyAirService;
 import com.travix.medusa.busyflights.util.ProjectUtil;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,10 +15,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * <p>
  * Created by ffaria on 7/18/17.
  */
-@Service
-public class CrazyAirServiceImpl implements HTTPCrazyAirService {
+public class HTTPCrazyAirService {
 
-    @Override
     public List<CrazyAirResponse> getResponse(CrazyAirRequest crazyAirRequest) {
 
         String origin = crazyAirRequest.getOrigin();
@@ -28,10 +24,9 @@ public class CrazyAirServiceImpl implements HTTPCrazyAirService {
         LocalDate departureDate = LocalDate.parse(crazyAirRequest.getDepartureDate(), DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate returnDate = LocalDate.parse(crazyAirRequest.getReturnDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
-        int randomFlightAmount = ThreadLocalRandom.current().nextInt(5 + 1);
-
         List<CrazyAirResponse> result = new ArrayList<>();
 
+        int randomFlightAmount = ThreadLocalRandom.current().nextInt(5 + 1);
 
         for (int i = 0; i < randomFlightAmount; i++) {
 

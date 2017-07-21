@@ -1,10 +1,8 @@
-package com.travix.medusa.busyflights.services.toughjet.impl;
+package com.travix.medusa.busyflights.services.toughjet;
 
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.services.toughjet.util.HTTPToughJetService;
 import com.travix.medusa.busyflights.util.ProjectUtil;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,19 +15,17 @@ import java.util.concurrent.ThreadLocalRandom;
  * <p>
  * Created by ffaria on 7/18/17.
  */
-@Service
-public class ToughJetServiceImpl implements HTTPToughJetService {
+public class HTTPToughJetService {
 
-    @Override
     public List<ToughJetResponse> getResponse(ToughJetRequest toughJetRequest) {
         String from = toughJetRequest.getFrom();
         String to = toughJetRequest.getTo();
         LocalDate outboundDate = LocalDate.parse(toughJetRequest.getOutboundDate(), DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate inboundDate = LocalDate.parse(toughJetRequest.getInboundDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
-        int randomFlightAmount = ThreadLocalRandom.current().nextInt(5 + 1);
-
         List<ToughJetResponse> result = new ArrayList<>();
+
+        int randomFlightAmount = ThreadLocalRandom.current().nextInt(5 + 1);
 
         for (int i = 0; i < randomFlightAmount; i++) {
 
@@ -57,13 +53,13 @@ public class ToughJetServiceImpl implements HTTPToughJetService {
                 outboundDateTime.append("T");
                 outboundDateTime.append(ProjectUtil.generateRandomTime(0, 23));
 
-                toughJetResponse.setOutboundDateTime(outboundDate.toString());
+                toughJetResponse.setOutboundDateTime(outboundDateTime.toString());
 
                 inboundDateTime.append(inboundDate.toString());
                 inboundDateTime.append("T");
                 inboundDateTime.append(ProjectUtil.generateRandomTime(0, 23));
 
-                toughJetResponse.setInboundDateTime(inboundDate.toString());
+                toughJetResponse.setInboundDateTime(inboundDateTime.toString());
             }
 
             toughJetResponse.setCarrier(ProjectUtil.getRandomAirline());
@@ -79,5 +75,4 @@ public class ToughJetServiceImpl implements HTTPToughJetService {
 
         return result;
     }
-
 }
