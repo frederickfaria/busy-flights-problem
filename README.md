@@ -108,13 +108,9 @@ The implemented services is assuming that the input that is already validated.
 
 **FOR PRODUCTION:**
 
-- Should be implemented validations in case server side validation are required.
-
-- Should be checked the error management.
-
 - Functional testing of border cases.
 
-- Write unit tests.
+- Write unit tests. **-Done in development branch-**
 
 **TO TEST IT:**
 
@@ -129,3 +125,9 @@ The implemented services is assuming that the input that is already validated.
  - numberOfPassengers=1 represents the amount of passengers
  
  **TOTAL TIME IMPLEMENTING THIS SOLUTION: 98 MINUTES**
+ 
+ **IN DEVELOPMENT BRANCH:**
+ 
+ Was improved the implementation fully changing the architecture, was checked the error management and added unit tests.
+ 
+  **TOTAL TIME IMPLEMENTING THE IMPROVEMENTS: 45 MINUTES**
